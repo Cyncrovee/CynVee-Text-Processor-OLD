@@ -106,7 +106,7 @@ namespace CynVee_Text_Processor
                 using (Windows.Storage.Streams.IRandomAccessStream randAccStream =
                     await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite))
                 {
-                    noteBox.Document.SaveToStream(Microsoft.UI.Text.TextGetOptions.None, randAccStream);
+                    noteBox.Document.SaveToStream(Microsoft.UI.Text.TextGetOptions.FormatRtf, randAccStream);
                 }
                 refreshList();
             }
@@ -144,7 +144,7 @@ namespace CynVee_Text_Processor
                 }
 
                 // Let Windows know that we're finished changing the file so the
-                // other app can update the remote version of the file.
+                // other app can update the remote version of the file
                 FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
                 if (status != FileUpdateStatus.Complete)
                 {
@@ -177,19 +177,10 @@ namespace CynVee_Text_Processor
                     using (Windows.Storage.Streams.IRandomAccessStream randAccStream =
                         await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
                     {
-                        // Load the file into the Document property of the RichEditBox.
                         noteBox.Document.LoadFromStream(Microsoft.UI.Text.TextSetOptions.FormatRtf, randAccStream);
                     }
                 }
                 openFile = file.Path;
-                //noteBox.Document.Selection.ParagraphFormat.ToString().TrimEnd();
-                /*var findNote = file.Path.ToString();
-                var lines = File.ReadLines(findNote);
-                foreach (var line in lines)
-                {
-                    noteBox.Document.Selection.TypeText(line + "\n");
-                }
-                openFile = file.Path;*/
             }
         }
         private async void clearBtn_Click(object sender, RoutedEventArgs e)
@@ -345,7 +336,6 @@ namespace CynVee_Text_Processor
         {
             if (noteList.SelectedItem != null)
             {
-                //noteBox.Document.SetText((Microsoft.UI.Text.TextSetOptions)Windows.UI.Text.TextSetOptions.FormatRtf, null);
                 string findNote = noteList.SelectedItem.ToString();
                 StorageFile storageFile = await StorageFile.GetFileFromPathAsync(findNote);
                 using (Windows.Storage.Streams.IRandomAccessStream randAccStream =
@@ -398,11 +388,6 @@ namespace CynVee_Text_Processor
                 }
                 openWorkspace = folder.Path;
                 localSettings.Values["lastOpenFolder"] = folder.Path;
-                // Application now has read/write access to all contents in the picked folder
-                // (including other sub-folder contents)
-                //Windows.Storage.AccessCache.StorageApplicationPermissions.
-                //FutureAccessList.AddOrReplace("PickedFolderToken", folder);
-                //this.textBlock.Text = "Picked folder: " + folder.Name;
             }
             else
             {
@@ -429,16 +414,24 @@ namespace CynVee_Text_Processor
                 }
                 openWorkspace = folder.Path;
                 localSettings.Values["lastOpenFolder"] = folder.Path;
-                // Application now has read/write access to all contents in the picked folder
-                // (including other sub-folder contents)
-                //Windows.Storage.AccessCache.StorageApplicationPermissions.
-                //FutureAccessList.AddOrReplace("PickedFolderToken", folder);
-                //this.textBlock.Text = "Picked folder: " + folder.Name;
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine("Open folder operation cancelled.");
             }
+        }
+
+        private async void aboutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog aboutDialog = new ContentDialog
+            {
+                Title = "CynVee Text Processor",
+                Content = "This is a simple rich text editing app made with the WinUI 3 Framework",
+                CloseButtonText = "Ok",
+            };
+
+            aboutDialog.XamlRoot = this.Content.XamlRoot;
+            ContentDialogResult result = await aboutDialog.ShowAsync();
         }
     }
 }

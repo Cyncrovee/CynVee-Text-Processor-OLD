@@ -70,7 +70,7 @@
                 </MenuBarItem>
 
                 <MenuBarItem Title="Help">
-                    <MenuFlyoutItem Text="About">
+                    <MenuFlyoutItem x:Name="aboutBtn" Text="About" Click="aboutBtn_Click">
                         <MenuFlyoutItem.KeyboardAccelerators>
                             <KeyboardAccelerator Modifiers="Control" Key="I"/>
                         </MenuFlyoutItem.KeyboardAccelerators>
