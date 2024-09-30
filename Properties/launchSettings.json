@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CynVee_Text_Processor (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CynVee_Text_Processor (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

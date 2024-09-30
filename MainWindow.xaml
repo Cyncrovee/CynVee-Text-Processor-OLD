@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="CynVee_Text_Processor.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CynVee_Text_Processor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="CynVee Text Processor"
+    mc:Ignorable="d">
+
+    <Page>
+        <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,*">
+        
+            <MenuBar Grid.Column="0" Grid.Row="0">
+                <MenuBarItem Title="File">
+                    <MenuFlyoutItem Text="Save" Click="quickSaveBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="S"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Save As" Click="saveBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Open..." Click="openBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="O"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Exit" Click="exitBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="E"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                </MenuBarItem>
+
+                <MenuBarItem Title="Edit">
+                    <MenuFlyoutItem Text="Undo" Click="undoBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="Z"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Redo" Click="redoBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="Y"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Cut" Click="cutBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="X"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Copy" Click="copyBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="C"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Select All">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="A"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Clear" Click="clearBtn_Click">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="L"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                </MenuBarItem>
+
+                <MenuBarItem Title="Help">
+                    <MenuFlyoutItem Text="About">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="I"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                </MenuBarItem>
+            </MenuBar>
+        
+            <Button x:Name="quickSaveBtn" Click="quickSaveBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Save File" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Grid.Column="0" Grid.Row="1">
+                <SymbolIcon Symbol="Save"/>
+            </Button>
+            <Button x:Name="saveBtn" Click="saveBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Save File As..." Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,5,0,5" Grid.Column="0" Grid.Row="1">
+                <SymbolIcon Symbol="SaveLocal"/>
+            </Button>
+            <Button x:Name="openBtn" Click="openBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Open File" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,5,0,5" Grid.Column="0" Grid.Row="1">
+                <SymbolIcon Symbol="OpenFile"/>
+            </Button>
+            <Button x:Name="clearBtn" Click="clearBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Clear All Text" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,5,0,5" Grid.Column="0" Grid.Row="1">
+                <SymbolIcon Symbol="Clear"/>
+            </Button>
+            <Button x:Name="deleteBtn" Click="deleteBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Delete File" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,5,0,0" Grid.Column="0" Grid.Row="1">
+                <SymbolIcon Symbol="Delete"/>
+            </Button>
+            <ComboBox x:Name="fontSelectionBox" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="315,5,0,0" Grid.Column="0" Grid.Row="1"/>
+            <ComboBox x:Name="fontSizeSelectionBox" IsEditable="True" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,5,0,0" Grid.Column="0" Grid.Row="1"/>
+            <ToggleButton x:Name="boldBtn" Click="boldBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Bold" Height="40" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,0,0" Grid.Column="1" Grid.Row="2">
+                <SymbolIcon Symbol="Bold"/>
+            </ToggleButton>
+            <ToggleButton x:Name="italicBtn" Click="italicBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Italic" Height="40" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,55,0,0" Grid.Column="1" Grid.Row="2">
+                <SymbolIcon Symbol="Italic"/>
+            </ToggleButton>
+            <ToggleButton x:Name="underlineBtn" Click="underlineBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Underline" Height="40" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,110,0,0" Grid.Column="1" Grid.Row="2">
+                <SymbolIcon Symbol="Underline"/>
+            </ToggleButton>
+            
+            <AppBarToggleButton x:Name="textPredictionBtn" Icon="Edit" Click="textPredictionBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Enable/Disable Predictive Text for Digital Keyboards" Height="50" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,230,0" Grid.Column="0" Grid.Row="1"/>
+            <AppBarToggleButton x:Name="spellcheckBtn" Icon="Favorite" Click="spellcheckBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Enable/Disable Spellcheck"  Height="50" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,180,0" Grid.Column="0" Grid.Row="1"/>
+            <AppBarToggleButton x:Name="alignLeftBtn" Icon="AlignLeft" Click="alignLeftBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Align Text Left" Height="50" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,110,0" Grid.Column="0" Grid.Row="1"/>
+            <AppBarToggleButton x:Name="alignCenterBtn" Icon="AlignCenter" Click="alignCenterBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Align Text Center" Height="50" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,55,0" Grid.Column="0" Grid.Row="1"/>
+            <AppBarToggleButton x:Name="alignRightBtn" Icon="AlignRight" Click="alignRightBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Align Text Right" Height="50" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,0,0" Grid.Column="0" Grid.Row="1"/>
+            
+            <RichEditBox x:Name="noteBox" AcceptsReturn="True" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="5,0,0,5" Grid.Column="0" Grid.Row="2"/>
+
+            <Button x:Name="settingBtn" ToolTipService.Placement="Right" ToolTipService.ToolTip="Open Settings" Height="40" Width="50" HorizontalAlignment="Right" Margin="0,5,5,0" Grid.Column="2" Grid.Row="0">
+                <SymbolIcon Symbol="Setting"/>
+                <Button.Flyout>
+                    <MenuFlyout Placement="BottomEdgeAlignedRight">
+                        <MenuFlyoutSubItem Text="Themes" FlowDirection="RightToLeft">
+                            <MenuFlyoutItem x:Name="followSystemThemeBtn" Text="Follow System" FlowDirection="RightToLeft"/>
+                            <MenuFlyoutItem x:Name="lightThemeBtn" Text="Light" FlowDirection="RightToLeft"/>
+                            <MenuFlyoutItem x:Name="darkThemeBtn" Text="Dark" FlowDirection="RightToLeft"/>
+                        </MenuFlyoutSubItem>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+            
+            <Button ToolTipService.Placement="Right" ToolTipService.ToolTip="Refresh File List" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.Column="2" Grid.Row="1">
+                <SymbolIcon Symbol="Sort"/>
+                <Button.Flyout>
+                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                        <MenuFlyoutItem Text="Sort by A-Z"/>
+                        <MenuFlyoutItem Text="Sort by last modified"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+            <Button x:Name="refreshListButton" Click="refreshListButton_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Refresh File List" Height="40" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,115,0" Grid.Column="2" Grid.Row="1">
+                <SymbolIcon Symbol="Refresh"/>
+            </Button>
+            <Button x:Name="fetchFolder" Click="fetchFolder_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Open Last Used Folder" Height="40" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,60,0" Grid.Column="2" Grid.Row="1">
+                <SymbolIcon Symbol="SyncFolder"/>
+            </Button>
+            <Button x:Name="openFolderBtn" Click="openFolderBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Open Folder" Height="40" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,5,0" Grid.Column="2" Grid.Row="1">
+                <SymbolIcon Symbol="Folder"/>
+            </Button>
+
+            <ListBox x:Name="noteList" DoubleTapped="noteList_DoubleTapped" ToolTipService.Placement="Right" ToolTipService.ToolTip="Double Click a File to Load" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="400" Margin="10,0,0,0" Grid.Column="2" Grid.Row="2">
+                <ListBox.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Open" Click="openBtn_Click"/>
+                        <MenuFlyoutItem Text="Delete" Click="deleteBtn_Click"/>
+                    </MenuFlyout>
+                </ListBox.ContextFlyout>
+            </ListBox>
+        </Grid>
+    </Page>
+</Window>
