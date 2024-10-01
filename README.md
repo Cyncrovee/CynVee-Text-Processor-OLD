@@ -13,6 +13,7 @@ This is a simple rich text editing app made with the WinUI 3 Framework
 - Quick saving files
 - Opening folders as a workspace
 - Spellcheck toggle
+- 'About' section
 
 ### Currently does not feature/Yet to add
 - Font type selection
@@ -20,5 +21,4 @@ This is a simple rich text editing app made with the WinUI 3 Framework
 - Font colour selection
 - Changing themes
 - Showing which file/folder is currently open
-- 'About' section
 - Sorting current workspace

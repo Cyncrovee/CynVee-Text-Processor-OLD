@@ -92,6 +92,20 @@ namespace CynVee_Text_Processor
             noteBox.Document.Selection.Copy();
         }
 
+        // Methods for "Help" menubar buttons
+        private async void aboutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog aboutDialog = new ContentDialog
+            {
+                Title = "CynVee Text Processor",
+                Content = "This is a simple rich text editing app made with the WinUI 3 Framework",
+                CloseButtonText = "Ok",
+            };
+
+            aboutDialog.XamlRoot = this.Content.XamlRoot;
+            ContentDialogResult result = await aboutDialog.ShowAsync();
+        }
+
 
         // Methods for top left ui buttons
         private async void quickSaveBtn_Click(object sender, RoutedEventArgs e)
@@ -421,17 +435,5 @@ namespace CynVee_Text_Processor
             }
         }
 
-        private async void aboutBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ContentDialog aboutDialog = new ContentDialog
-            {
-                Title = "CynVee Text Processor",
-                Content = "This is a simple rich text editing app made with the WinUI 3 Framework",
-                CloseButtonText = "Ok",
-            };
-
-            aboutDialog.XamlRoot = this.Content.XamlRoot;
-            ContentDialogResult result = await aboutDialog.ShowAsync();
-        }
     }
 }
