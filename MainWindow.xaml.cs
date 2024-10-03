@@ -391,21 +391,24 @@ namespace CynVee_Text_Processor
         private async void fetchFolder_Click(object sender, RoutedEventArgs e)
         {
             var folderPath = localSettings.Values["lastOpenFolder"];
-            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync((string)folderPath);
-            if (folder != null)
+            if (folderPath != null)
             {
-                noteList.Items.Clear();
-                IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
-                foreach (StorageFile file in sortedItems)
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync((string)folderPath);
+                if (folder != null)
                 {
-                    noteList.Items.Add(file.Path);
+                    noteList.Items.Clear();
+                    IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
+                    foreach (StorageFile file in sortedItems)
+                    {
+                        noteList.Items.Add(file.Path);
+                    }
+                    openWorkspace = folder.Path;
+                    localSettings.Values["lastOpenFolder"] = folder.Path;
                 }
-                openWorkspace = folder.Path;
-                localSettings.Values["lastOpenFolder"] = folder.Path;
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Open folder operation cancelled.");
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Open folder operation cancelled.");
+                }
             }
         }
         private async void openFolderBtn_Click(object sender, RoutedEventArgs e)

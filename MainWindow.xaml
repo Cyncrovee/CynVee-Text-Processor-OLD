@@ -78,7 +78,7 @@
                 </MenuBarItem>
             </MenuBar>
         
-            <Button x:Name="quickSaveBtn" Click="quickSaveBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Save File" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Grid.Column="0" Grid.Row="1">
+            <Button x:Name="quickSaveBtn" Click="quickSaveBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Save" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Grid.Column="0" Grid.Row="1">
                 <SymbolIcon Symbol="Save"/>
             </Button>
             <Button x:Name="saveBtn" Click="saveBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Save File As..." Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,5,0,5" Grid.Column="0" Grid.Row="1">
@@ -93,8 +93,10 @@
             <Button x:Name="deleteBtn" Click="deleteBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Delete File" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,5,0,0" Grid.Column="0" Grid.Row="1">
                 <SymbolIcon Symbol="Delete"/>
             </Button>
-            <ComboBox x:Name="fontSelectionBox" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="315,5,0,0" Grid.Column="0" Grid.Row="1"/>
-            <ComboBox x:Name="fontSizeSelectionBox" IsEditable="True" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,5,0,0" Grid.Column="0" Grid.Row="1"/>
+            
+            <ComboBox x:Name="fontSelectionBox" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font (WIP)" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="315,5,0,0" Grid.Column="0" Grid.Row="1"/>
+            <ComboBox x:Name="fontSizeSelectionBox" IsEditable="True" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font Size (WIP)" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,5,0,0" Grid.Column="0" Grid.Row="1"/>
+            
             <ToggleButton x:Name="boldBtn" Click="boldBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Bold" Height="40" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,0,0" Grid.Column="1" Grid.Row="2">
                 <SymbolIcon Symbol="Bold"/>
             </ToggleButton>
@@ -113,7 +115,7 @@
             
             <RichEditBox x:Name="noteBox" AcceptsReturn="True" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="5,0,0,5" Grid.Column="0" Grid.Row="2"/>
 
-            <Button x:Name="settingBtn" ToolTipService.Placement="Right" ToolTipService.ToolTip="Open Settings" Height="40" Width="50" HorizontalAlignment="Right" Margin="0,5,5,0" Grid.Column="2" Grid.Row="0">
+            <Button x:Name="settingBtn" ToolTipService.Placement="Right" ToolTipService.ToolTip="Open Settings (WIP)" Height="40" Width="50" HorizontalAlignment="Right" Margin="0,5,5,0" Grid.Column="2" Grid.Row="0">
                 <SymbolIcon Symbol="Setting"/>
                 <Button.Flyout>
                     <MenuFlyout Placement="BottomEdgeAlignedRight">
@@ -126,7 +128,7 @@
                 </Button.Flyout>
             </Button>
             
-            <Button ToolTipService.Placement="Right" ToolTipService.ToolTip="Refresh File List" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.Column="2" Grid.Row="1">
+            <Button ToolTipService.Placement="Right" ToolTipService.ToolTip="Sort File List (WIP)" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.Column="2" Grid.Row="1">
                 <SymbolIcon Symbol="Sort"/>
                 <Button.Flyout>
                     <MenuFlyout Placement="BottomEdgeAlignedLeft">
