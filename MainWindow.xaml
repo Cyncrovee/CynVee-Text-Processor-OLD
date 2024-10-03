@@ -128,12 +128,12 @@
                 </Button.Flyout>
             </Button>
             
-            <Button ToolTipService.Placement="Right" ToolTipService.ToolTip="Sort File List (WIP)" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.Column="2" Grid.Row="1">
+            <Button x:Name="sortButton" ToolTipService.Placement="Right" ToolTipService.ToolTip="Sort File List (WIP)" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.Column="2" Grid.Row="1">
                 <SymbolIcon Symbol="Sort"/>
                 <Button.Flyout>
                     <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                        <MenuFlyoutItem Text="Sort by A-Z"/>
-                        <MenuFlyoutItem Text="Sort by last modified"/>
+                        <MenuFlyoutItem x:Name="atozSortButton" Click="atozSortButton_Click" Text="Sort by A-Z"/>
+                        <MenuFlyoutItem x:Name="bydateSortButton" Click="bydateSortButton_Click" Text="Sort by date"/>
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>

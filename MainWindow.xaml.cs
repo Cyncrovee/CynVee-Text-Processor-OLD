@@ -66,6 +66,8 @@ namespace CynVee_Text_Processor
         string openWorkspace = null;
         string openFile = null;
 
+        string sortMethodString = null;
+
 
         // Methods for "File" menubar buttons
         private void exitBtn_Click(object sender, RoutedEventArgs e)
@@ -364,7 +366,25 @@ namespace CynVee_Text_Processor
                 //do nothing
             }
         }
-        private async void refreshList()
+        private async void atozSortButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(openWorkspace);
+                noteList.Items.Clear();
+                IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
+                foreach (StorageFile file in sortedItems)
+                {
+                    noteList.Items.Add(file.Path);
+                }
+                localSettings.Values["sortMethod"] = CommonFileQuery.OrderByName;
+            }
+            catch (Exception)
+            {
+                System.Diagnostics.Debug.WriteLine("Could not refresh list.");
+            }
+        }
+        private async void bydateSortButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -375,10 +395,68 @@ namespace CynVee_Text_Processor
                 {
                     noteList.Items.Add(file.Path);
                 }
+                localSettings.Values["sortMethod"] = CommonFileQuery.OrderByDate;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 System.Diagnostics.Debug.WriteLine("Could not refresh list.");
+            }
+        }
+
+        private async void refreshList()
+        {
+            string folderPath = (string)localSettings.Values["lastOpenFolder"];
+            switch (localSettings.Values["sortMethod"])
+            {
+                case CommonFileQuery.OrderByName:
+                    try
+                    {
+                        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
+                        noteList.Items.Clear();
+                        IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
+                        foreach (StorageFile file in sortedItems)
+                        {
+                            noteList.Items.Add(file.Path);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Could not refresh list (OrderByName)");
+                    }
+                    break;
+                case CommonFileQuery.OrderByDate:
+                    try
+                    {
+                        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
+                        noteList.Items.Clear();
+                        IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
+                        foreach (StorageFile file in sortedItems)
+                        {
+                            noteList.Items.Add(file.Path);
+                        }
+                    }
+                    catch(Exception)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Could not refresh list (OrderByDate)");
+                    }
+                    break;
+                case null:
+                    try
+                    {
+                        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
+                        noteList.Items.Clear();
+                        IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
+                        foreach (StorageFile file in sortedItems)
+                        {
+                            noteList.Items.Add(file.Path);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Could not refresh list (OrderByDate [Default])");
+                    }
+                    break;
+
             }
         }
 
@@ -390,6 +468,7 @@ namespace CynVee_Text_Processor
         }
         private async void fetchFolder_Click(object sender, RoutedEventArgs e)
         {
+            var localSort = localSettings.Values["sortMethod"];
             var folderPath = localSettings.Values["lastOpenFolder"];
             if (folderPath != null)
             {
