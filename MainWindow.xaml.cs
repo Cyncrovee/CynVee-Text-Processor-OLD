@@ -468,7 +468,6 @@ namespace CynVee_Text_Processor
         }
         private async void fetchFolder_Click(object sender, RoutedEventArgs e)
         {
-            var localSort = localSettings.Values["sortMethod"];
             var folderPath = localSettings.Values["lastOpenFolder"];
             if (folderPath != null)
             {
