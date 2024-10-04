@@ -90,8 +90,6 @@ namespace CynVee_Text_Processor
         string openWorkspace = null;
         string openFile = null;
 
-        string sortMethodString = null;
-
 
         // Methods for "File" menubar buttons
         private void exitBtn_Click(object sender, RoutedEventArgs e)
