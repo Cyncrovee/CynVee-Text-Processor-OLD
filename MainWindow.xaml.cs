@@ -25,6 +25,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Reflection.Metadata;
 using Microsoft.UI.Xaml.Shapes;
 using Microsoft.UI;
+using Microsoft.UI.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -59,6 +60,8 @@ namespace CynVee_Text_Processor
             string testFontSize = noteBox.FontSize.ToString();
             System.Diagnostics.Debug.WriteLine(testFont);
             System.Diagnostics.Debug.WriteLine(testFontSize);
+
+
 
             if (noteBox.IsSpellCheckEnabled == true)
             {
@@ -537,5 +540,43 @@ namespace CynVee_Text_Processor
             }
         }
 
+        private async void lightThemeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog changeTheme = new ContentDialog
+            {
+                Title = "To apply theme change, a restart of the app is required",
+                Content = "You will have to resart the app manually",
+                PrimaryButtonText = "Ok",
+                CloseButtonText = "Cancel"
+            };
+
+            changeTheme.XamlRoot = this.Content.XamlRoot;
+            ContentDialogResult result = await changeTheme.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                localSettings.Values["themeSetting"] = 0;
+            }
+        }
+
+        private async void darkThemeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            localSettings.Values["themeSetting"] = 1;
+            ContentDialog changeTheme = new ContentDialog
+            {
+                Title = "To apply theme change, a restart of the app is required",
+                Content = "You will have to resart the app manually",
+                PrimaryButtonText = "Ok",
+                CloseButtonText = "Cancel"
+            };
+
+            changeTheme.XamlRoot = this.Content.XamlRoot;
+            ContentDialogResult result = await changeTheme.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                localSettings.Values["themeSetting"] = 1;
+            }
+        }
     }
 }

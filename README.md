@@ -17,8 +17,8 @@ This is a simple rich text editing app made with the WinUI 3 Framework
 - Sorting current workspace
 - Font family selection
 - Font size selection
+- Changing themes
 
 ### Currently does not feature/Yet to add
 - Font colour selection
-- Changing themes
 - Showing which file/folder is currently open

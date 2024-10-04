@@ -115,14 +115,13 @@
             
             <RichEditBox x:Name="noteBox" AcceptsReturn="True" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="5,0,0,5" Grid.Column="0" Grid.Row="2"/>
 
-            <Button x:Name="settingBtn" ToolTipService.Placement="Right" ToolTipService.ToolTip="Open Settings (WIP)" Height="40" Width="50" HorizontalAlignment="Right" Margin="0,5,5,0" Grid.Column="2" Grid.Row="0">
+            <Button x:Name="settingBtn" ToolTipService.Placement="Right" ToolTipService.ToolTip="Open Settings" Height="40" Width="50" HorizontalAlignment="Right" Margin="0,5,5,0" Grid.Column="2" Grid.Row="0">
                 <SymbolIcon Symbol="Setting"/>
                 <Button.Flyout>
                     <MenuFlyout Placement="BottomEdgeAlignedRight">
                         <MenuFlyoutSubItem Text="Themes" FlowDirection="RightToLeft">
-                            <MenuFlyoutItem x:Name="followSystemThemeBtn" Text="Follow System" FlowDirection="RightToLeft"/>
-                            <MenuFlyoutItem x:Name="lightThemeBtn" Text="Light" FlowDirection="RightToLeft"/>
-                            <MenuFlyoutItem x:Name="darkThemeBtn" Text="Dark" FlowDirection="RightToLeft"/>
+                            <MenuFlyoutItem x:Name="lightThemeBtn" Click="lightThemeBtn_Click" Text="Light" FlowDirection="RightToLeft"/>
+                            <MenuFlyoutItem x:Name="darkThemeBtn" Click="darkThemeBtn_Click" Text="Dark" FlowDirection="RightToLeft"/>
                         </MenuFlyoutSubItem>
                     </MenuFlyout>
                 </Button.Flyout>

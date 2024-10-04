@@ -36,7 +36,14 @@ namespace CynVee_Text_Processor
         {
             this.InitializeComponent();
 
-            var themeSetting = localSettings.Values["themeSetting"];
+
+            object value = localSettings.Values["themeSetting"];
+
+            if (value != null)
+            {
+                // Apply theme choice.
+                App.Current.RequestedTheme = (ApplicationTheme)(int)value;
+            }
         }
 
         /// <summary>
