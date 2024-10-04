@@ -39,6 +39,27 @@ namespace CynVee_Text_Processor
         {
             this.InitializeComponent();
 
+            // Default font is Segoe UI Variable
+            List<string> items = new List<string>
+            {
+                // Variable fonts
+                "Segoe UI Variable", "Bahnschrift",
+                // Sans-serif fonts
+                "Segoe UI", "Arial", "Calibri", "Consolas", "Selawik",
+                // Serif fonts
+                "Cambria", "Courier New", "Georgia", "Times New Roman"
+            };
+            // Default font size is 14
+            int[] fontSizeArray = Enumerable.Range(1, 256).ToArray();
+
+            fontSelectionBox.ItemsSource = items;
+            fontSizeSelectionBox.ItemsSource = fontSizeArray;
+
+            string testFont = noteBox.FontFamily.Source.ToString();
+            string testFontSize = noteBox.FontSize.ToString();
+            System.Diagnostics.Debug.WriteLine(testFont);
+            System.Diagnostics.Debug.WriteLine(testFontSize);
+
             if (noteBox.IsSpellCheckEnabled == true)
             {
                 spellcheckBtn.IsChecked = true;
@@ -247,6 +268,18 @@ namespace CynVee_Text_Processor
             refreshList();
         }
 
+        // Methods for comboboxes
+        private void fontSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedFont = fontSelectionBox.SelectedItem.ToString();
+            noteBox.FontFamily = new FontFamily(selectedFont);
+        }
+        private void fontSizeSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int selectedFontSize = (int)fontSizeSelectionBox.SelectedItem;
+            noteBox.FontSize = selectedFontSize;
+        }
+
 
         // Methods for top right ui buttons
         private void textPredictionBtn_Click(object sender, RoutedEventArgs e)
@@ -342,7 +375,7 @@ namespace CynVee_Text_Processor
             {
                 noteBox.Document.Selection.CharacterFormat.Underline = UnderlineType.None;
                 underline = false;
-                underlineBtn.IsChecked= false;
+                underlineBtn.IsChecked = false;
             }
         }
 
@@ -377,7 +410,7 @@ namespace CynVee_Text_Processor
                 {
                     noteList.Items.Add(file.Path);
                 }
-                localSettings.Values["sortMethod"] = CommonFileQuery.OrderByName;
+                localSettings.Values["sortMethod"] = 1;
             }
             catch (Exception)
             {
@@ -395,7 +428,7 @@ namespace CynVee_Text_Processor
                 {
                     noteList.Items.Add(file.Path);
                 }
-                localSettings.Values["sortMethod"] = CommonFileQuery.OrderByDate;
+                localSettings.Values["sortMethod"] = 2;
             }
             catch (Exception)
             {
@@ -405,58 +438,33 @@ namespace CynVee_Text_Processor
 
         private async void refreshList()
         {
-            string folderPath = (string)localSettings.Values["lastOpenFolder"];
-            switch (localSettings.Values["sortMethod"])
+            try
             {
-                case CommonFileQuery.OrderByName:
-                    try
-                    {
-                        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
-                        noteList.Items.Clear();
-                        IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
-                        foreach (StorageFile file in sortedItems)
-                        {
-                            noteList.Items.Add(file.Path);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Could not refresh list (OrderByName)");
-                    }
-                    break;
-                case CommonFileQuery.OrderByDate:
-                    try
-                    {
-                        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
-                        noteList.Items.Clear();
-                        IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
-                        foreach (StorageFile file in sortedItems)
-                        {
-                            noteList.Items.Add(file.Path);
-                        }
-                    }
-                    catch(Exception)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Could not refresh list (OrderByDate)");
-                    }
-                    break;
-                case null:
-                    try
-                    {
-                        StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
-                        noteList.Items.Clear();
-                        IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
-                        foreach (StorageFile file in sortedItems)
-                        {
-                            noteList.Items.Add(file.Path);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Could not refresh list (OrderByDate [Default])");
-                    }
-                    break;
+                string folderPath = (string)localSettings.Values["lastOpenFolder"];
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
+                noteList.Items.Clear();
+                IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
+                switch(localSettings.Values["sortMethod"])
+                {
+                    case 1:
+                        sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
+                        break;
+                    case 2:
+                        sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
+                        break;
+                    case null:
+                        sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
+                        break;
 
+                }
+                foreach (StorageFile file in sortedItems)
+                {
+                    noteList.Items.Add(file.Path);
+                }
+            }
+            catch
+            {
+                System.Diagnostics.Debug.WriteLine("Could not refresh list");
             }
         }
 
@@ -476,6 +484,19 @@ namespace CynVee_Text_Processor
                 {
                     noteList.Items.Clear();
                     IReadOnlyList<StorageFile> sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
+                    switch (localSettings.Values["sortMethod"])
+                    {
+                        case 1:
+                            sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
+                            break;
+                        case 2:
+                            sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
+                            break;
+                        case null:
+                            sortedItems = await folder.GetFilesAsync(CommonFileQuery.OrderByDate);
+                            break;
+                    }
+                    
                     foreach (StorageFile file in sortedItems)
                     {
                         noteList.Items.Add(file.Path);

@@ -15,10 +15,10 @@ This is a simple rich text editing app made with the WinUI 3 Framework
 - Spellcheck toggle
 - 'About' section
 - Sorting current workspace
+- Font family selection
+- Font size selection
 
 ### Currently does not feature/Yet to add
-- Font type selection
-- Font size selection
 - Font colour selection
 - Changing themes
 - Showing which file/folder is currently open

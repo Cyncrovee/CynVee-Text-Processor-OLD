@@ -93,9 +93,9 @@
             <Button x:Name="deleteBtn" Click="deleteBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Delete File" Height="40" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,5,0,0" Grid.Column="0" Grid.Row="1">
                 <SymbolIcon Symbol="Delete"/>
             </Button>
-            
-            <ComboBox x:Name="fontSelectionBox" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font (WIP)" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="315,5,0,0" Grid.Column="0" Grid.Row="1"/>
-            <ComboBox x:Name="fontSizeSelectionBox" IsEditable="True" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font Size (WIP)" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,5,0,0" Grid.Column="0" Grid.Row="1"/>
+
+            <ComboBox x:Name="fontSelectionBox" SelectedItem="Segoe UI Variable" SelectionChanged="fontSelectionBox_SelectionChanged" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font (WIP)" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="295,5,0,0" Grid.Column="0" Grid.Row="1"/>
+            <ComboBox x:Name="fontSizeSelectionBox" SelectedIndex="13" SelectionChanged="fontSizeSelectionBox_SelectionChanged" IsEditable="True" ToolTipService.Placement="Right" ToolTipService.ToolTip="Change Font Size (WIP)" Height="40" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="480,5,0,0" Grid.Column="0" Grid.Row="1"/>
             
             <ToggleButton x:Name="boldBtn" Click="boldBtn_Click" ToolTipService.Placement="Right" ToolTipService.ToolTip="Bold" Height="40" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,0,0" Grid.Column="1" Grid.Row="2">
                 <SymbolIcon Symbol="Bold"/>
