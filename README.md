@@ -1,5 +1,8 @@
 # CynVee-Text-Processor
 
+This repository will soon be archived, as I am migrating the project from WinUI to WPF. The new repository is here:
+https://github.com/Cyncrovee/CynVee-Text-Processor
+
 This is a simple rich text editing app made with the WinUI 3 Framework
 
 ### Currently Features:
